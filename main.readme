@@ -1,0 +1,829 @@
+# MASTER DEVELOPMENT PROMPT — LAST SIGNAL
+## Build a Premium Realistic 3D Sci-Fi Rover Exploration Game
+
+You are a senior game developer, 3D environment artist, React Three Fiber specialist, gameplay engineer, and UI/UX designer.
+
+Your task is to design and develop a complete, polished, playable browser-based 3D game named **LAST SIGNAL**.
+
+Do not just create a visual prototype or a basic Three.js scene. Build an actual playable game with working mechanics, a proper mission system, a realistic 3D environment, an immersive interface, and carefully structured code.
+
+You have full responsibility for implementing the project in the current workspace.
+
+---
+
+# 1. GAME VISION
+
+**Game title:** LAST SIGNAL
+
+**Mission:** 01 — THE LOST FACILITY
+
+**Genre:** Third-person 3D exploration, survival, and vehicle simulation.
+
+**Platform:** Desktop web browser, with responsive support for smaller screens.
+
+**Visual direction:** Realistic sci-fi exploration with cinematic environmental lighting, industrial design, realistic materials, atmospheric fog, detailed models, and immersive sound.
+
+### Core story
+
+The year is 2089.
+
+A remote scientific research facility located in an isolated desert region has suddenly stopped transmitting signals.
+
+The facility was conducting experiments involving an advanced energy system. Communication was lost after an unexplained incident.
+
+An autonomous rescue rover has been deployed to investigate the facility.
+
+The player controls this rover.
+
+The mission is to enter the abandoned research facility, explore the surrounding environment, locate three missing energy cores, avoid environmental hazards, and reactivate the emergency communication beacon.
+
+Once the beacon is activated, the mission is complete.
+
+The experience should feel like a small section of a premium sci-fi exploration game.
+
+Do not attempt to create a huge open world. Create one compact but highly detailed and believable playable level.
+
+---
+
+# 2. TECHNOLOGY STACK
+
+Use the following technologies:
+
+- React 19
+- Vite
+- JavaScript (ES6+)
+- Three.js
+- React Three Fiber
+- @react-three/drei
+- Zustand for game state management
+- @react-three/rapier for physics and collision detection
+- CSS3 for interface design
+
+Use compatible stable versions of all dependencies.
+
+The project must run locally using:
+
+npm install
+npm run dev
+
+It must also build successfully using:
+
+npm run build
+
+Do not introduce unnecessary backend services, APIs, authentication, or database dependencies. This is a standalone single-player game.
+
+---
+
+# 3. IMPORTANT: VI3W INTEGRATION
+
+The game is being built as a demonstration project for VI3W (https://app.vi3w.in).
+
+VI3W is a sketch-to-image-to-3D generation platform.
+
+The purpose of this project is to demonstrate how 3D assets generated through VI3W can be incorporated into an actual interactive game.
+
+This is extremely important.
+
+I want to use VI3W-generated models for important game objects rather than relying entirely on primitive Three.js geometry.
+
+### Assets to generate using VI3W
+
+1. Main rescue rover.
+2. Abandoned research facility building.
+3. Energy core collectible.
+4. Emergency communication beacon.
+5. Industrial crates and containers.
+6. Additional sci-fi equipment and environmental props.
+
+### Asset workflow
+
+For each asset:
+
+1. Create a suitable concept or sketch.
+2. Generate the image through VI3W.
+3. Generate the corresponding 3D model.
+4. Export the model in GLB format.
+5. Integrate it into the React Three Fiber scene.
+
+Use this asset directory:
+
+public/
+  assets/
+    models/
+      rover.glb
+      facility.glb
+      energy-core.glb
+      beacon.glb
+      crate.glb
+    textures/
+    audio/
+
+### Very important asset instructions
+
+Do not pretend to have generated models through VI3W.
+
+Do not create fake GLB references or assume that assets exist.
+
+Initially, build functional placeholder models using Three.js geometry.
+
+Design the asset loading system so that I can replace those placeholder objects with actual VI3W-generated GLB files without rewriting gameplay logic.
+
+Create reusable model components and a clear asset configuration.
+
+When a GLB model is missing, the game must continue working with its placeholder.
+
+Provide a README section explaining exactly how to generate, export, place, and integrate VI3W models.
+
+---
+
+# 4. VISUAL DESIGN DIRECTION
+
+This is one of the most important aspects of the project.
+
+I do not want a generic low-poly student project.
+
+I want a realistic, cinematic, premium-looking environment.
+
+### Environment concept
+
+Imagine an abandoned futuristic research station in a rocky desert.
+
+The environment should contain:
+
+- Large rocky desert terrain.
+- Uneven ground and realistic-looking rock formations.
+- Abandoned industrial structures.
+- Research facility buildings.
+- Metallic containers and equipment.
+- Damaged communication antennas.
+- Abandoned machinery.
+- Desert dust and atmospheric fog.
+- Hazard warning lights.
+- Industrial roads and pathways.
+- Scattered debris and rocks.
+- A distant horizon with mountains.
+
+### Lighting
+
+Use cinematic environmental lighting.
+
+Implement:
+
+- Directional sunlight.
+- Hemisphere lighting.
+- Ambient illumination.
+- Dynamic shadows.
+- Fog with carefully tuned distances.
+- Emissive lighting for important mission objects.
+- Subtle atmospheric particles.
+- Contrast between warm environmental lighting and cool industrial lights.
+
+The environment should have a believable atmosphere.
+
+Avoid excessive bloom, excessive neon colors, or unnecessarily bright lighting.
+
+### Color palette
+
+Primary environment:
+
+- Dusty grey.
+- Warm sand.
+- Dark charcoal.
+- Weathered metallic surfaces.
+- Muted industrial green.
+
+Accent colors:
+
+- Emergency lime green.
+- Cyan energy lights.
+- Warning amber.
+- Red hazard lighting.
+
+Use physically based materials wherever possible.
+
+---
+
+# 5. PLAYER AND ROVER SYSTEM
+
+The main playable character is a futuristic four-wheel autonomous rescue rover.
+
+The rover must look like a believable industrial machine, not a toy car.
+
+### Rover design
+
+- Four large off-road wheels.
+- Rugged metallic chassis.
+- Dark charcoal body.
+- Reinforced front bumper.
+- Sensor mast.
+- Emergency green status lights.
+- Front-mounted headlights.
+- Visible suspension-inspired details.
+- Industrial panels and mechanical details.
+
+### Movement system
+
+Implement a functional third-person rover controller.
+
+Controls:
+
+- W: Accelerate forward.
+- S: Reverse.
+- A: Steer left.
+- D: Steer right.
+- SPACE: Brake.
+- SHIFT: Temporary speed boost.
+- E: Interact with mission objects.
+- ESC: Pause the game.
+
+### Movement requirements
+
+- Smooth acceleration.
+- Gradual deceleration.
+- Reverse movement.
+- Smooth steering.
+- Different turning behavior at low and high speeds.
+- Speed limits.
+- Responsive braking.
+- Realistic-looking wheel rotation.
+- Slight chassis movement during turning and acceleration.
+- Collision detection with environmental obstacles.
+
+Do not simply move the rover at constant speed.
+
+Implement an arcade-style vehicle controller with believable movement characteristics.
+
+The controller should be easy to tune through configuration constants.
+
+### Camera system
+
+Implement a smooth third-person follow camera.
+
+The camera should:
+
+- Follow behind the rover.
+- Maintain a suitable distance.
+- Follow the rover's turning direction.
+- Smoothly interpolate between positions.
+- Avoid sudden camera snapping.
+- Look slightly ahead of the rover.
+- Avoid clipping through nearby geometry where practical.
+
+The camera should communicate vehicle speed and environment depth.
+
+---
+
+# 6. GAMEPLAY AND MISSION SYSTEM
+
+The game must have a complete mission loop.
+
+## Mission 01: THE LOST FACILITY
+
+The player starts outside the research facility.
+
+The primary objective is to collect three energy cores.
+
+### Objective 1 — Explore the facility
+
+The player must drive around the environment and locate the abandoned research buildings.
+
+Display mission instructions through the HUD.
+
+### Objective 2 — Collect three energy cores
+
+Place three collectible objects at different locations.
+
+Each energy core should:
+
+- Have a unique visual appearance.
+- Emit a subtle glow.
+- Be recognizable from a reasonable distance.
+- Have an animated idle state.
+- Trigger a collection animation or particle effect.
+- Update the mission counter immediately.
+
+Interaction should be implemented reliably using a suitable detection radius or physics overlap.
+
+HUD counter:
+
+ENERGY CORES: 0/3
+
+Update it as the player collects the objects.
+
+### Objective 3 — Environmental hazards
+
+Introduce toxic gas zones and hazardous areas.
+
+The player should:
+
+- Receive a warning when entering a dangerous area.
+- Lose health while inside the hazard.
+- See a warning indicator on the HUD.
+- Be encouraged to avoid dangerous areas.
+
+Do not make hazards unnecessarily difficult.
+
+### Objective 4 — Restore the emergency signal
+
+After collecting all three energy cores, the extraction beacon becomes available.
+
+The beacon should have:
+
+- A distinctive model.
+- Animated cyan or green lighting.
+- An activation interaction.
+- A visible activation sequence.
+- A successful mission-completion event.
+
+The player must approach the beacon and press E.
+
+### Mission completion
+
+When the mission is completed:
+
+- Play a suitable visual effect.
+- Show a mission-completed screen.
+- Display mission time.
+- Display collected energy cores.
+- Show a RESTART MISSION button.
+- Allow the player to replay.
+
+### Failure conditions
+
+The player can fail the mission when:
+
+- Health reaches zero.
+- The mission countdown reaches zero.
+
+Show an actual game-over screen with restart functionality.
+
+---
+
+# 7. USER INTERFACE AND EXPERIENCE
+
+The interface must look like a premium sci-fi game.
+
+It should not resemble a generic dashboard or an ordinary website.
+
+Use a minimalist military-industrial interface with a dark translucent appearance and subtle lime-green accents.
+
+### A. Main menu
+
+Create a cinematic opening screen.
+
+Include:
+
+LAST SIGNAL
+
+MISSION 01: THE LOST FACILITY
+
+A short subtitle:
+
+"Somewhere beyond the signal, something is waiting."
+
+Buttons:
+
+- NEW MISSION
+- SETTINGS
+- ABOUT
+
+Use a cinematic background scene showing the rover and abandoned facility.
+
+The main menu must be visually impressive.
+
+### B. Mission briefing
+
+Before starting the game, display a short briefing.
+
+Example:
+
+MISSION BRIEFING
+
+LOCATION: RESEARCH SECTOR 07
+
+STATUS: COMMUNICATION LOST
+
+OBJECTIVE:
+Recover three energy cores and restore the emergency transmission beacon.
+
+Show a START MISSION button.
+
+### C. In-game HUD
+
+The HUD should contain:
+
+Top left:
+- Mission title.
+- Current objective.
+- Mission progress.
+
+Top right:
+- Mission timer.
+- Health percentage.
+- Vehicle speed.
+
+Bottom left:
+- Keyboard controls.
+- Interaction hints.
+
+Bottom center or right:
+- Energy core collection progress.
+
+Show interaction prompts contextually.
+
+Example:
+
+[ E ] COLLECT ENERGY CORE
+
+When nearby.
+
+### D. Pause menu
+
+Implement a working pause menu.
+
+Include:
+
+- RESUME
+- RESTART MISSION
+- MAIN MENU
+
+The game timer and gameplay must actually pause.
+
+### E. Mission completion screen
+
+Design a cinematic mission-completion screen.
+
+Include:
+
+MISSION COMPLETED
+
+SIGNAL RESTORED
+
+TIME TAKEN
+
+ENERGY CORES RECOVERED
+
+RESTART / MAIN MENU
+
+All buttons must function.
+
+---
+
+# 8. GAME ENVIRONMENT AND LEVEL DESIGN
+
+Create a carefully designed compact level rather than randomly placing objects.
+
+The level should contain several distinguishable areas.
+
+### Zone A — Starting area
+
+- Rover deployment position.
+- Initial mission briefing location.
+- Open terrain.
+- Visible facility in the distance.
+
+### Zone B — Industrial perimeter
+
+- Damaged walls.
+- Metal containers.
+- Abandoned machinery.
+- Rocks and debris.
+- Warning lights.
+
+### Zone C — Research facility
+
+- Main industrial building.
+- Entrance.
+- Power equipment.
+- First energy core.
+- Environmental hazards.
+
+### Zone D — Hazard zone
+
+- Toxic gas area.
+- Damaged equipment.
+- Hazard warning indicators.
+- Second energy core.
+
+### Zone E — Communication sector
+
+- Antenna structure.
+- Emergency beacon.
+- Third energy core.
+- Final mission objective.
+
+Place objectives strategically so the player must explore the level.
+
+Provide clear visual landmarks and navigable paths.
+
+Avoid spawning objects randomly in inaccessible locations.
+
+---
+
+# 9. TECHNICAL ARCHITECTURE
+
+Maintain a modular architecture.
+
+Use the following structure as a guideline:
+
+src/
+  components/
+    MainMenu.jsx
+    MissionBriefing.jsx
+    HUD.jsx
+    PauseMenu.jsx
+    GameOver.jsx
+    MissionComplete.jsx
+    LoadingScreen.jsx
+
+  game/
+    GameCanvas.jsx
+    World.jsx
+    Lighting.jsx
+    Environment.jsx
+    MissionManager.jsx
+    CameraController.jsx
+
+  entities/
+    Rover.jsx
+    RoverModel.jsx
+    Collectible.jsx
+    Hazard.jsx
+    Beacon.jsx
+    Building.jsx
+
+  systems/
+    VehicleController.js
+    CollisionSystem.js
+    MissionSystem.js
+
+  store/
+    gameStore.js
+
+  hooks/
+    useGameTimer.js
+    useInteraction.js
+
+  config/
+    gameConfig.js
+    assetConfig.js
+
+  styles/
+    global.css
+    game.css
+    ui.css
+
+  App.jsx
+  main.jsx
+
+You may adjust the structure when technically justified.
+
+### State management
+
+Use Zustand for global state.
+
+Centralize:
+
+- Current game screen.
+- Mission status.
+- Health.
+- Timer.
+- Collection progress.
+- Current objective.
+- Pause status.
+- Mission completion.
+
+Do not use React state updates for every frame of movement.
+
+Use refs and useFrame for high-frequency 3D operations.
+
+Keep the UI responsive to meaningful game-state changes.
+
+### Physics
+
+Use React Three Rapier for collision handling where appropriate.
+
+Implement:
+
+- Ground collision.
+- Rover collision.
+- Environment obstacle collision.
+- Collectible overlap detection.
+- Hazard detection.
+- Beacon interaction radius.
+
+Avoid unnecessarily complicated physics.
+
+The rover should have predictable and reliable controls.
+
+### Performance
+
+Optimize for a normal desktop PC and browser.
+
+Implement:
+
+- Reasonable polygon counts.
+- Efficient materials.
+- Shadow optimization.
+- Controlled device pixel ratio.
+- Reusable geometry.
+- Instancing where appropriate.
+- Efficient rendering.
+- Resource cleanup.
+
+Do not sacrifice the visual quality unnecessarily.
+
+---
+
+# 10. AUDIO AND IMMERSION
+
+Add audio support where practical.
+
+Use local audio assets if available.
+
+Include:
+
+- Low-volume environmental ambience.
+- Rover engine sound.
+- Collection sound.
+- Hazard warning sound.
+- Beacon activation sound.
+- Mission completion sound.
+
+Audio must not prevent the game from starting when files are unavailable.
+
+Provide volume controls in settings.
+
+Do not download copyrighted music or sounds without permission.
+
+---
+
+# 11. RESPONSIVE AND INPUT SUPPORT
+
+Desktop keyboard controls are the priority.
+
+Also support:
+
+- Browser window resizing.
+- Appropriate UI scaling.
+- Pointer focus management.
+- Fullscreen mode where supported.
+- Touch control buttons on smaller screens.
+
+Do not allow accidental browser scrolling or keyboard events to interfere with gameplay.
+
+Show a useful loading screen while 3D assets load.
+
+Handle missing assets gracefully.
+
+---
+
+# 12. VISUAL QUALITY EXPECTATIONS
+
+The following are non-negotiable:
+
+1. Do not make the environment look like a flat plane with random cubes.
+2. Do not use default-colored primitive shapes as the final visual design.
+3. Do not create a generic HTML dashboard around a 3D canvas.
+4. Do not overload the scene with bright lights.
+5. Do not make the rover look like a basic toy.
+6. Do not leave buttons non-functional.
+7. Do not implement fake mission progression.
+8. Do not leave unfinished placeholder text in the UI.
+9. Do not use fake Vi3W assets.
+10. Do not create unnecessary features that compromise the core gameplay.
+
+Placeholders are acceptable during development, but organize them so that they can be replaced with actual generated assets.
+
+Focus on cohesive art direction.
+
+---
+
+# 13. DEVELOPMENT WORKFLOW
+
+Work directly in the current project workspace.
+
+Follow this process:
+
+### STEP 1 — Inspect
+
+Inspect the existing project files and dependencies.
+
+If a project already exists, preserve useful code and avoid unnecessarily replacing the entire project.
+
+If the workspace is empty, create the Vite React project.
+
+### STEP 2 — Architecture
+
+Set up the folder structure, dependencies, configuration, and state management.
+
+### STEP 3 — Core 3D scene
+
+Build:
+
+- Terrain.
+- Facility.
+- Environment objects.
+- Lighting.
+- Rover.
+- Third-person camera.
+
+### STEP 4 — Playable vehicle
+
+Implement smooth and reliable movement, steering, braking, and collisions.
+
+Test keyboard interaction.
+
+### STEP 5 — Gameplay
+
+Implement:
+
+- Energy core collection.
+- Hazard zones.
+- Health.
+- Timer.
+- Beacon interaction.
+- Mission completion.
+- Failure states.
+
+### STEP 6 — Interface
+
+Build the complete main menu, briefing, HUD, pause, and results screens.
+
+### STEP 7 — Visual polish
+
+Improve materials, lighting, shadows, particles, model details, and audio.
+
+### STEP 8 — Testing
+
+Run the project.
+
+Check all gameplay systems.
+
+Fix runtime errors, console errors, missing imports, and broken interactions.
+
+Run:
+
+npm run build
+
+Do not claim that the project is complete if the build fails.
+
+### STEP 9 — Documentation
+
+Create a README.md containing:
+
+- Game overview.
+- Features.
+- Technologies.
+- Setup instructions.
+- Controls.
+- Project architecture.
+- VI3W asset generation workflow.
+- Instructions for replacing placeholder models.
+- Build and deployment instructions.
+
+---
+
+# 14. EXECUTION RULES FOR THE CODING AGENT
+
+These instructions are important.
+
+- Actually write and modify the project files.
+- Do not merely explain how to implement something.
+- Do not stop after creating the project structure.
+- Do not give me pseudocode in place of implementation.
+- Do not ask me to manually create files that you can create yourself.
+- Do not assume GLB assets exist.
+- Implement sensible defaults wherever information is missing.
+- Keep the source code modular and readable.
+- Install dependencies when required.
+- Run the development server and build checks.
+- Fix the problems you discover.
+- Keep me informed about important implementation decisions.
+- When a feature depends on a missing external asset, implement a graceful placeholder and document what is needed.
+
+Prioritize a functioning complete core game over a large collection of unfinished features.
+
+If the full project is too large to complete in one execution, finish it in logical stages, preserving working functionality between stages.
+
+---
+
+# 15. FINAL EXPECTED RESULT
+
+I expect a complete browser-based game that I can launch locally.
+
+When I open the website, I should see a cinematic LAST SIGNAL main menu.
+
+When I start the mission, I should enter a realistic sci-fi research facility environment.
+
+I should be able to drive the rescue rover using WASD.
+
+I should be able to explore the level, collect three energy cores, avoid hazards, monitor health, and activate the final communication beacon.
+
+I should be able to complete or fail the mission and restart it.
+
+The game must look polished enough to present as a serious demonstration of my development skills and VI3W's sketch-to-3D capabilities.
+
+The project should be suitable for deployment and sharing with the VI3W founder.
+
+**FINAL INSTRUCTION: Start inspecting the workspace and implementing LAST SIGNAL now. Build the actual playable product, not just a plan or design proposal.**
